@@ -1,0 +1,16 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "title": "React Native",
+      "text": "React Native is an open source framework for building Android and iOS applications using React.",
+      "date": "01 December 2023 10:30 AM"
+    },
+    {
+      "id": "2",
+      "title": "Tasks",
+      "text": "To-do items",
+      "date": "02 December 2023 12:30 PM"
+    }
+  ]
+}
