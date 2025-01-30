@@ -18,7 +18,8 @@ import BottomBar from './BottomBar';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../redux/store';
-import {fetchNotes, removeNote} from '../redux/slices/notesSlice';
+// import {fetchNotes, removeNote} from '../redux/slices/notesSlice';
+import {fetchNotesRequest, deleteNoteRequest} from '../redux/slices/notesSlice';
 import {RootState} from '../redux/store';
 
 const NotesLayout = ({navigation}: {navigation: any}) => {
@@ -31,7 +32,8 @@ const NotesLayout = ({navigation}: {navigation: any}) => {
   );
 
   useEffect(() => {
-    dispatch(fetchNotes());
+    // dispatch(fetchNotes());
+    dispatch(fetchNotesRequest());
   }, [dispatch]);
 
   // const handleDelete = (noteIds: string[]) => {
@@ -127,7 +129,11 @@ const NotesLayout = ({navigation}: {navigation: any}) => {
           onPress: () => {
             console.log('Deleting notes:', selectedNotes); // Debug log
             // deleteNotes(selectedNotes);
-            selectedNotes.forEach(id => dispatch(removeNote(id)));
+            // selectedNotes.forEach(id => dispatch(removeNote(id)));
+            selectedNotes.forEach(id => {
+              dispatch(deleteNoteRequest(id as unknown as void));
+            });
+
             setSelectedNotes([]);
             setSelectionMode(false);
           },
@@ -171,7 +177,7 @@ const NotesLayout = ({navigation}: {navigation: any}) => {
         <View style={styles.nodataContainer}>
           {loading && <Text>Loading notes...</Text>}
           {error && <Text>Error: {error}</Text>}
-          {filteredNotes.length === 0 && (
+          {!loading && !error && filteredNotes.length === 0 && (
             <Text style={styles.cardText}>No notes found. Add a new one.</Text>
           )}
         </View>

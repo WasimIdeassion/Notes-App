@@ -4,7 +4,8 @@ import {useTheme} from '../context/ThemeContext';
 // import {useNotes} from '../context/NotesContext';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../redux/store';
-import {createNote, editNote} from '../redux/slices/notesSlice';
+// import {createNote, editNote} from '../redux/slices/notesSlice';
+import {createNoteRequest, editNoteRequest} from '../redux/slices/notesSlice';
 
 const NoteEditor = ({route, navigation}: {route: any; navigation: any}) => {
   const {theme} = useTheme(); // Access the current theme
@@ -46,9 +47,9 @@ const NoteEditor = ({route, navigation}: {route: any; navigation: any}) => {
 
     try {
       if (note) {
-        dispatch(editNote({id: note.id, note: updatedNote}));
+        dispatch(editNoteRequest({id: updatedNote.id, note: updatedNote}));
       } else {
-        dispatch(createNote(updatedNote));
+        dispatch(createNoteRequest(updatedNote));
       }
       navigation.goBack();
     } catch (error) {
